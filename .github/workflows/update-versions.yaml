@@ -1,0 +1,73 @@
+name: Update versions
+
+on:
+  schedule:
+    - cron: "0 11 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Fetch latest versions
+        uses: nick-fields/retry@v4
+        with:
+          max_attempts: 5
+          timeout_minutes: 10
+          command: |
+            set -uo pipefail
+            VAULTWARDEN=$(git ls-remote --tags https://github.com/dani-garcia/vaultwarden \
+              | awk -F/ '!/\^{}/ {gsub("^v", "", $3); print $3}' \
+              | grep -E '^[0-9]+\.[0-9]+\.[0-9]+$' \
+              | sort -V | tail -1)
+            BW_WEB=$(git ls-remote --tags https://github.com/dani-garcia/bw_web_builds \
+              | awk -F/ '!/\^{}/ {gsub("^v", "", $3); print $3}' \
+              | grep -E '^[0-9]{4}\.' \
+              | sort -V | tail -1)
+            GCC=$(curl -sf https://ftp.gnu.org/gnu/gcc/ \
+              | grep -o 'gcc-[0-9]\+\.[0-9]\+\.[0-9]\+/' \
+              | sed 's#gcc-##; s#/##' \
+              | sort -V | tail -n 1)
+            ZLIB=$(curl -sf https://zlib.net/ \
+              | grep -o 'zlib-[0-9]\+\.[0-9]\+\(\.[0-9]\+\)\?\.tar\.gz' \
+              | sed 's/zlib-//; s/\.tar\.gz//' \
+              | sort -V | tail -n 1)
+            OPENSSL=$(git ls-remote --tags https://github.com/openssl/openssl \
+              | awk -F/ '/[0-9]$/ && /openssl-/ && ! /-[a-z]/ {gsub("openssl-", ""); print $3}' \
+              | sort -V | grep -Ev '^4' | tail -1)
+            BROTLI=$(git ls-remote --tags https://github.com/google/brotli \
+              | awk -F/ '!/\^{}/ {gsub("^v", "", $3); print $3}' \
+              | grep -E '^[0-9]+\.[0-9]+\.[0-9]+$' \
+              | sort -V | tail -1)
+            ZSTD=$(git ls-remote --tags https://github.com/facebook/zstd \
+              | awk -F/ '!/\^{}/ {gsub("^v", "", $3); print $3}' \
+              | grep -E '^[0-9]+\.[0-9]+\.[0-9]+$' \
+              | sort -V | tail -1)
+            LIBPQ=$(git ls-remote --tags https://github.com/postgres/postgres \
+              | awk -F/ '/REL_/ {gsub("REL_", ""); gsub(/_[A-Z]+[0-9]+/, ""); gsub("_", "."); print $3}' \
+              | sort -V | uniq | tail -1)
+
+            yq -i ".vaultwarden= \"$VAULTWARDEN\"" versions.yaml
+            yq -i ".bw_web= \"$BW_WEB\"" versions.yaml
+            yq -i ".gcc= \"$GCC\"" versions.yaml
+            yq -i ".zlib= \"$ZLIB\"" versions.yaml
+            yq -i ".openssl= \"$OPENSSL\"" versions.yaml
+            yq -i ".brotli= \"$BROTLI\"" versions.yaml
+            yq -i ".zstd= \"$ZSTD\"" versions.yaml
+            yq -i ".libpq= \"$LIBPQ\"" versions.yaml
+            git diff versions.yaml
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v8
+        with:
+          branch: update-versions
+          delete-branch: true
+          title: Update versions
+          commit-message: Update versions
