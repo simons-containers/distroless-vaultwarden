@@ -24,11 +24,11 @@ jobs:
           command: |
             set -uo pipefail
             VAULTWARDEN=$(git ls-remote --tags https://github.com/dani-garcia/vaultwarden \
-              | awk -F/ '!/\^{}/ {gsub("^v", "", $3); print $3}' \
+              | awk -F/ '!/\^\{\}/ {gsub("^v", "", $3); print $3}' \
               | grep -E '^[0-9]+\.[0-9]+\.[0-9]+$' \
               | sort -V | tail -1)
             BW_WEB=$(git ls-remote --tags https://github.com/dani-garcia/bw_web_builds \
-              | awk -F/ '!/\^{}/ {gsub("^v", "", $3); print $3}' \
+              | awk -F/ '!/\^\{\}/ {gsub("^v", "", $3); print $3}' \
               | grep -E '^[0-9]{4}\.' \
               | sort -V | tail -1)
             GCC=$(curl -sf https://ftp.gnu.org/gnu/gcc/ \
@@ -43,17 +43,18 @@ jobs:
               | awk -F/ '/[0-9]$/ && /openssl-/ && ! /-[a-z]/ {gsub("openssl-", ""); print $3}' \
               | sort -V | grep -Ev '^4' | tail -1)
             BROTLI=$(git ls-remote --tags https://github.com/google/brotli \
-              | awk -F/ '!/\^{}/ {gsub("^v", "", $3); print $3}' \
+              | awk -F/ '!/\^\{\}/ {gsub("^v", "", $3); print $3}' \
               | grep -E '^[0-9]+\.[0-9]+\.[0-9]+$' \
               | sort -V | tail -1)
             ZSTD=$(git ls-remote --tags https://github.com/facebook/zstd \
-              | awk -F/ '!/\^{}/ {gsub("^v", "", $3); print $3}' \
+              | awk -F/ '!/\^\{\}/ {gsub("^v", "", $3); print $3}' \
               | grep -E '^[0-9]+\.[0-9]+\.[0-9]+$' \
               | sort -V | tail -1)
             LIBPQ=$(git ls-remote --tags https://github.com/postgres/postgres \
               | awk -F/ '/REL_/ {gsub("REL_", ""); gsub(/_[A-Z]+[0-9]+/, ""); gsub("_", "."); print $3}' \
               | sort -V | uniq | tail -1)
 
+            : "${VAULTWARDEN:?}" "${BW_WEB:?}" "${GCC:?}" "${ZLIB:?}" "${OPENSSL:?}" "${BROTLI:?}" "${ZSTD:?}" "${LIBPQ:?}"
             yq -i ".vaultwarden= \"$VAULTWARDEN\"" versions.yaml
             yq -i ".bw_web= \"$BW_WEB\"" versions.yaml
             yq -i ".gcc= \"$GCC\"" versions.yaml
