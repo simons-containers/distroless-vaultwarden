@@ -11,7 +11,7 @@ Example:
 ```bash
 docker run -it --rm -v ./data:/var/lib/vaultwarden \
   -e DATABASE_URL=postgresql://user:pass@host/db \
-  -p 80:80 \
+  -e ROCKET_PORT=8080 -p 8080:8080 \
   ghcr.io/simons-containers/distroless-vaultwarden:latest
 ```
 
