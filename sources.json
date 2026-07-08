@@ -1,0 +1,58 @@
+{
+  "vaultwarden": {
+    "version": "1.36.0",
+    "purl": "pkg:generic/vaultwarden",
+    "source": {
+      "url_pattern": "https://github.com/dani-garcia/vaultwarden/archive/refs/tags/{version}.tar.gz"
+    }
+  },
+  "bw_web": {
+    "version": "2026.4.1",
+    "purl": "pkg:generic/bw_web",
+    "release": {
+      "url_pattern": "https://github.com/dani-garcia/bw_web_builds/releases/download/v{version}/bw_web_v{version}.tar.gz"
+    }
+  },
+  "gcc": {
+    "version": "16.1.0",
+    "purl": "pkg:generic/gcc",
+    "source": {
+      "url_pattern": "https://ftp.gnu.org/gnu/gcc/gcc-{version}/gcc-{version}.tar.xz"
+    }
+  },
+  "zlib": {
+    "version": "1.3.2",
+    "purl": "pkg:generic/zlib",
+    "source": {
+      "url_pattern": "https://zlib.net/zlib-{version}.tar.gz"
+    }
+  },
+  "openssl": {
+    "version": "3.6.3",
+    "purl": "pkg:generic/openssl",
+    "source": {
+      "url_pattern": "https://www.openssl.org/source/openssl-{version}.tar.gz"
+    }
+  },
+  "brotli": {
+    "version": "1.2.0",
+    "purl": "pkg:generic/brotli",
+    "source": {
+      "url_pattern": "https://github.com/google/brotli/archive/refs/tags/v{version}.tar.gz"
+    }
+  },
+  "zstd": {
+    "version": "1.5.7",
+    "purl": "pkg:generic/zstd",
+    "source": {
+      "url_pattern": "https://github.com/facebook/zstd/releases/download/v{version}/zstd-{version}.tar.gz"
+    }
+  },
+  "libpq": {
+    "version": "18.4",
+    "purl": "pkg:generic/libpq",
+    "source": {
+      "url_pattern": "https://ftp.postgresql.org/pub/source/v{version}/postgresql-{version}.tar.gz"
+    }
+  }
+}
