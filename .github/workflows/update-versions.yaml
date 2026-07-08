@@ -68,7 +68,7 @@ jobs:
               --arg libpq "$LIBPQ" \
               '
                 .vaultwarden.version = $vaultwarden |
-                .bw_web.version = $bw_web
+                .bw_web.version = $bw_web |
                 .gcc.version = $gcc |
                 .zlib.version = $zlib |
                 .openssl.version = $openssl |
