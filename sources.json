@@ -2,7 +2,7 @@
   "vaultwarden": {
     "version": "1.36.0",
     "purl": "pkg:generic/vaultwarden",
-    "cpe": "cpe:2.3:*:dani-garcia:vaultwarden:*:*:*:*:*:*:*:*",
+    "cpe": "cpe:2.3:a:dani-garcia:vaultwarden:*:*:*:*:*:*:*:*",
     "source": {
       "url_pattern": "https://github.com/dani-garcia/vaultwarden/archive/refs/tags/{version}.tar.gz"
     }
@@ -17,6 +17,7 @@
   "gcc": {
     "version": "16.1.0",
     "purl": "pkg:generic/gcc",
+    "cpe": "cpe:2.3:a:gnu:gcc:*:*:*:*:*:*:*:*",
     "source": {
       "url_pattern": "https://ftp.gnu.org/gnu/gcc/gcc-{version}/gcc-{version}.tar.xz"
     }
@@ -24,6 +25,7 @@
   "zlib": {
     "version": "1.3.2",
     "purl": "pkg:generic/zlib",
+    "cpe": "cpe:2.3:a:zlib:zlib:*:*:*:*:*:*:*:*",
     "source": {
       "url_pattern": "https://zlib.net/zlib-{version}.tar.gz"
     }
@@ -31,6 +33,7 @@
   "openssl": {
     "version": "3.6.3",
     "purl": "pkg:generic/openssl",
+    "cpe": "cpe:2.3:a:openssl:openssl:*:*:*:*:*:*:*:*",
     "source": {
       "url_pattern": "https://www.openssl.org/source/openssl-{version}.tar.gz"
     }
@@ -38,6 +41,7 @@
   "brotli": {
     "version": "1.2.0",
     "purl": "pkg:generic/brotli",
+    "cpe": "cpe:2.3:a:google:brotli:*:*:*:*:*:*:*:*",
     "source": {
       "url_pattern": "https://github.com/google/brotli/archive/refs/tags/v{version}.tar.gz"
     }
@@ -45,6 +49,7 @@
   "zstd": {
     "version": "1.5.7",
     "purl": "pkg:generic/zstd",
+    "cpe": "cpe:2.3:a:facebook:zstandard:*:*:*:*:*:*:*:*",
     "source": {
       "url_pattern": "https://github.com/facebook/zstd/releases/download/v{version}/zstd-{version}.tar.gz"
     }
@@ -52,6 +57,7 @@
   "libpq": {
     "version": "18.4",
     "purl": "pkg:generic/libpq",
+    "cpe": "cpe:2.3:a:postgresql:postgresql:*:*:*:*:*:*:*:*",
     "source": {
       "url_pattern": "https://ftp.postgresql.org/pub/source/v{version}/postgresql-{version}.tar.gz"
     }
