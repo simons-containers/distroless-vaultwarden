@@ -54,16 +54,30 @@ jobs:
               | awk -F/ '/REL_[0-9]+_[0-9]+/ {gsub("REL_", ""); gsub("_", "."); print $3}' \
               | sort -V | uniq | tail -1)
 
-            : "${VAULTWARDEN:?}" "${BW_WEB:?}" "${GCC:?}" "${ZLIB:?}" "${OPENSSL:?}" "${BROTLI:?}" "${ZSTD:?}" "${LIBPQ:?}"
-            yq -i ".vaultwarden= \"$VAULTWARDEN\"" versions.yaml
-            yq -i ".bw_web= \"$BW_WEB\"" versions.yaml
-            yq -i ".gcc= \"$GCC\"" versions.yaml
-            yq -i ".zlib= \"$ZLIB\"" versions.yaml
-            yq -i ".openssl= \"$OPENSSL\"" versions.yaml
-            yq -i ".brotli= \"$BROTLI\"" versions.yaml
-            yq -i ".zstd= \"$ZSTD\"" versions.yaml
-            yq -i ".libpq= \"$LIBPQ\"" versions.yaml
-            git diff versions.yaml
+            : ${VAULTWARDEN:?} ${BW_WEB:?} ${GCC:?} ${ZLIB:?} 
+            : ${OPENSSL:?} ${BROTLI:?} ${ZSTD:?} ${LIBPQ:?}
+
+            jq \
+              --arg vaultwarden "$VAULTWARDEN" \
+              --arg bw_web "$BW_WEB" \
+              --arg gcc "$GCC" \
+              --arg zlib "$ZLIB" \
+              --arg openssl "$OPENSSL" \
+              --arg brotli "$BROTLI" \
+              --arg zstd "$ZSTD" \
+              --arg libpq "$LIBPQ" \
+              '
+                .vaultwarden.version = $vaultwarden |
+                .bw_web.version = $bw_web
+                .gcc.version = $gcc |
+                .zlib.version = $zlib |
+                .openssl.version = $openssl |
+                .brotli.version = $brotli |
+                .zstd.version = $zstd |
+                .libpq.version = $libpq
+              ' sources.json > tmp.json && mv tmp.json sources.json
+
+            git diff sources.json
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v8
