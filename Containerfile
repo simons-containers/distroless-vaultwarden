@@ -9,14 +9,14 @@ ARG LIBPQ_VERSION
 ARG VAULTWARDEN_VERSION
 ARG BW_WEB_VERSION
 
-ARG GCC_SOURCE=https://mirrors.ocf.berkeley.edu/gnu/gcc/gcc-${GCC_VERSION}/gcc-${GCC_VERSION}.tar.gz
-ARG ZLIB_SOURCE=https://zlib.net/zlib-${ZLIB_VERSION}.tar.gz
-ARG OPENSSL_SOURCE=https://github.com/openssl/openssl/releases/download/openssl-${OPENSSL_VERSION}/openssl-${OPENSSL_VERSION}.tar.gz
-ARG BROTLI_SOURCE=https://github.com/google/brotli/archive/refs/tags/v${BROTLI_VERSION}.tar.gz
-ARG ZSTD_SOURCE=https://github.com/facebook/zstd/releases/download/v${ZSTD_VERSION}/zstd-${ZSTD_VERSION}.tar.gz
-ARG LIBPQ_SOURCE=https://ftp.postgresql.org/pub/source/v${LIBPQ_VERSION}/postgresql-${LIBPQ_VERSION}.tar.gz
-ARG VAULTWARDEN_SOURCE=https://github.com/dani-garcia/vaultwarden/archive/refs/tags/${VAULTWARDEN_VERSION}.tar.gz
-ARG BW_WEB_RELEASE=https://github.com/dani-garcia/bw_web_builds/releases/download/v${BW_WEB_VERSION}/bw_web_v${BW_WEB_VERSION}.tar.gz
+ARG GCC_SOURCE
+ARG ZLIB_SOURCE
+ARG OPENSSL_SOURCE
+ARG BROTLI_SOURCE
+ARG ZSTD_SOURCE
+ARG LIBPQ_SOURCE
+ARG VAULTWARDEN_SOURCE
+ARG BW_WEB_RELEASE
 
 RUN pacman -Sy --noconfirm cmake cargo >/dev/null
 
