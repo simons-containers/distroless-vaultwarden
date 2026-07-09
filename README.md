@@ -17,27 +17,6 @@ docker run -it --rm -v ./data:/var/lib/vaultwarden \
   ghcr.io/simons-containers/distroless-vaultwarden:latest
 ```
 
-## Building
-
-| Arg | Description |
-|---|---|
-| `VAULTWARDEN_VERSION` | Version of Vaultwarden to build |
-| `BW_WEB_VERSION` | Version of the Bitwarden web vault UI |
-| `GCC_VERSION` | GCC version to use |
-| `ZLIB_VERSION` | zlib version to use |
-| `OPENSSL_VERSION` | OpenSSL version to use |
-| `BROTLI_VERSION` | brotli version to use |
-| `ZSTD_VERSION` | zstd version to use |
-| `LIBPQ_VERSION` | PostgreSQL client library version |
-
-Build container using build-args from versions.yaml:
-
-```bash
-docker build -t \
-  distroless-vaultwarden:$(yq -r .vaultwarden versions.yaml) \
-  $(yq -r 'to_entries | .[] | "--build-arg \(.key | ascii_upcase)_VERSION=\(.value)"' versions.yaml) -f Containerfile .
-```
-
 ## License
 
 Repository contents (e.g., `Containerfile`, build scripts, and configuration) are licensed under the **MIT License**.
