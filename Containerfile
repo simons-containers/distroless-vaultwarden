@@ -111,7 +111,7 @@ RUN rm -fr /base/usr/lib/{pkgconfig,cmake,gcc} /base/usr/lib/*.a /base/usr/lib/*
     /base/usr/share/{doc,info,man,locale,postgresql} /base/usr/share/gcc-* \
     /base/usr/include
 
-FROM ghcr.io/simons-containers/distroless-glibc:2.43
+FROM ghcr.io/simons-containers/distroless-glibc:2.44
 ARG GCC_VERSION
 ARG ZLIB_VERSION
 ARG OPENSSL_VERSION
