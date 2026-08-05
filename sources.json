@@ -1,6 +1,6 @@
 {
   "vaultwarden": {
-    "version": "1.36.0",
+    "version": "1.37.1",
     "purl": "pkg:generic/vaultwarden",
     "cpe": "cpe:2.3:a:dani-garcia:vaultwarden:*:*:*:*:*:*:*:*",
     "source": {
@@ -8,7 +8,7 @@
     }
   },
   "bw_web": {
-    "version": "2026.4.1",
+    "version": "2026.6.4",
     "purl": "pkg:generic/bw_web",
     "release": {
       "url_pattern": "https://github.com/dani-garcia/bw_web_builds/releases/download/v{version}/bw_web_v{version}.tar.gz"
