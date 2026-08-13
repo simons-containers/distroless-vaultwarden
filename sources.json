@@ -55,7 +55,7 @@
     }
   },
   "libpq": {
-    "version": "18.4",
+    "version": "18.6",
     "purl": "pkg:generic/libpq",
     "cpe": "cpe:2.3:a:postgresql:postgresql:*:*:*:*:*:*:*:*",
     "source": {
