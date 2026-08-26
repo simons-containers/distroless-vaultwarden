@@ -1,6 +1,6 @@
 {
   "vaultwarden": {
-    "version": "1.37.1",
+    "version": "1.37.2",
     "purl": "pkg:generic/vaultwarden",
     "cpe": "cpe:2.3:a:dani-garcia:vaultwarden:*:*:*:*:*:*:*:*",
     "source": {
@@ -31,7 +31,7 @@
     }
   },
   "openssl": {
-    "version": "3.6.3",
+    "version": "3.6.4",
     "purl": "pkg:generic/openssl",
     "cpe": "cpe:2.3:a:openssl:openssl:*:*:*:*:*:*:*:*",
     "source": {
