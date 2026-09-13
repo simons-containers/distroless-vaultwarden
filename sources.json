@@ -1,6 +1,6 @@
 {
   "vaultwarden": {
-    "version": "1.37.2",
+    "version": "1.37.3",
     "purl": "pkg:generic/vaultwarden",
     "cpe": "cpe:2.3:a:dani-garcia:vaultwarden:*:*:*:*:*:*:*:*",
     "source": {
