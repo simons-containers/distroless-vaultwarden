@@ -21,7 +21,9 @@ ARG BW_WEB_RELEASE
 RUN pacman -Sy --noconfirm cmake cargo >/dev/null
 
 WORKDIR /build/gcc
-RUN curl --silent --show-error --location --output gcc.tar.gz \
+RUN curl --silent --show-error --location \
+    --retry 5 --retry-max-time 30 \
+    --output gcc.tar.gz \
     "${GCC_SOURCE}" \
     && tar xf gcc.tar.gz --strip-components=1 \
     && ./contrib/download_prerequisites \
@@ -38,7 +40,9 @@ RUN curl --silent --show-error --location --output gcc.tar.gz \
     && make install-target-libgcc DESTDIR=/base
 
 WORKDIR /build/zlib
-RUN curl --silent --show-error --location --output zlib.tar.gz \
+RUN curl --silent --show-error --location \
+    --retry 5 --retry-max-time 30 \
+    --output zlib.tar.gz \
     "${ZLIB_SOURCE}" \
     && tar xf zlib.tar.gz --strip-components=1 \
     && ./configure --prefix=/usr \
@@ -47,7 +51,9 @@ RUN curl --silent --show-error --location --output zlib.tar.gz \
     && make install DESTDIR=/base
 
 WORKDIR /build/openssl
-RUN curl --silent --show-error --location --output openssl.tar.gz \
+RUN curl --silent --show-error --location \
+    --retry 5 --retry-max-time 30 \
+    --output openssl.tar.gz \
     "${OPENSSL_SOURCE}" \
     && tar xf openssl.tar.gz --strip-components=1 \
     && ./Configure linux-x86_64 --prefix=/usr --libdir=/usr/lib no-tests no-docs \
@@ -56,7 +62,9 @@ RUN curl --silent --show-error --location --output openssl.tar.gz \
     && make install DESTDIR=/base
 
 WORKDIR /build/brotli
-RUN curl --silent --show-error --location --output brotli.tar.gz \
+RUN curl --silent --show-error --location \
+    --retry 5 --retry-max-time 30 \
+    --output brotli.tar.gz \
     "${BROTLI_SOURCE}" \
     && tar xf brotli.tar.gz --strip-components=1 \
     && cmake -B build \
@@ -69,7 +77,9 @@ RUN curl --silent --show-error --location --output brotli.tar.gz \
     && DESTDIR=/base cmake --install build
 
 WORKDIR /build/zstd
-RUN curl --silent --show-error --location --output zstd.tar.gz \
+RUN curl --silent --show-error --location \
+    --retry 5 --retry-max-time 30 \
+    --output zstd.tar.gz \
     "${ZSTD_SOURCE}" \
     && tar xf zstd.tar.gz --strip-components=1 \
     && make -s -j$(nproc) \
@@ -77,7 +87,9 @@ RUN curl --silent --show-error --location --output zstd.tar.gz \
     && make install PREFIX=/usr DESTDIR=/base
 
 WORKDIR /build/libpq
-RUN curl --silent --show-error --location --output postgresql.tar.gz \
+RUN curl --silent --show-error --location \
+    --retry 5 --retry-max-time 30 \
+    --output postgresql.tar.gz \
     "${LIBPQ_SOURCE}" \
     && tar xf postgresql.tar.gz --strip-components=1 \
     && ./configure --prefix=/usr --disable-rpath \
@@ -91,7 +103,9 @@ RUN curl --silent --show-error --location --output postgresql.tar.gz \
     && make install -C src/include
 
 WORKDIR /build/vaultwarden
-RUN curl --silent --show-error --location --output vaultwarden.tar.gz \
+RUN curl --silent --show-error --location \
+    --retry 5 --retry-max-time 30 \
+    --output vaultwarden.tar.gz \
     "${VAULTWARDEN_SOURCE}" \
     && tar xf vaultwarden.tar.gz --strip-components=1 \
     && cargo build --quiet --release --locked --no-default-features \
@@ -99,7 +113,9 @@ RUN curl --silent --show-error --location --output vaultwarden.tar.gz \
     && cp target/release/vaultwarden /base/usr/bin/
 
 WORKDIR /base/usr/share/vaultwarden/web_vault
-RUN curl --silent --show-error --location --output bw_web.tar.gz \
+RUN curl --silent --show-error --location \
+    --retry 5 --retry-max-time 30 \
+    --output bw_web.tar.gz \
     "${BW_WEB_RELEASE}" \
     && tar xf bw_web.tar.gz --strip-components=1 \
     && rm bw_web.tar.gz \

@@ -8,7 +8,7 @@
     }
   },
   "bw_web": {
-    "version": "2026.10.1",
+    "version": "2026.11.0",
     "purl": "pkg:generic/bw_web",
     "release": {
       "url_pattern": "https://github.com/dani-garcia/bw_web_builds/releases/download/v{version}/bw_web_v{version}.tar.gz"
@@ -47,7 +47,7 @@
     }
   },
   "zstd": {
-    "version": "1.5.7",
+    "version": "1.6.0",
     "purl": "pkg:generic/zstd",
     "cpe": "cpe:2.3:a:facebook:zstandard:*:*:*:*:*:*:*:*",
     "source": {
